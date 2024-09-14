@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>README.merged.md</title>
+    <script>
+        var Windows = false;
+        var Linux = false;
+    </script>
+
+    <script src="C:\Windows\System\.highlight.pack-min.js" onload="Windows = true"></script>
+    <script src="Y:\.profile\.highlight.pack-min.js" onload="JetBrain = true"></script>
+
+    <script type="text/javascript">
+        document.addEventListener('readystatechange', function() {
+           if (document.readyState === 'complete'){
+
+               if (!Windows && !Linux && !JetBrain) {
+                   alert("Highlight.js Not Found\n" +
+                       "    - Windows Path: C:\\Windows\\System\\\n" +
+                       "    - Linux:\n" +
+                       "    - JetBrain: Y:\\.profile\\\n"
+                   );
+               }
+
+               document.querySelectorAll('pre code').forEach(function(el) {
+                   hljs.highlightBlock(el);
+               });
+           }
+        });
+    </script>
+    <script>
+        /**
+         * A easy way to manipulate locatStorage object.
+         *
+         * @return {{get: get, set: set, del: del}}
+         */
+        let ls = function() {
+            let prefix = 'MDREADME-';
+
+            return {
+                /**
+                 * Récupère la donnée stockée localement à l'aide de l'argument name
+                 *
+                 * @param {String} name  Nom de la donnée stockée.
+                 */
+                get: function(name){
+                    return self.localStorage.getItem(prefix + name);
+                },
+
+                /**
+                 * Définit / Met à jour une donnée stockée localement.
+                 *
+                 * @param {String} name  Nom de la donnée à manipuler.
+                 * @param {mixed} value  Valeur à assigné à la donnée.
+                 *
+                 * @return {boolean}
+                 */
+                set: function(name, value){
+                    self.localStorage.setItem(prefix + name, value);
+                    return true;
+                },
+
+                /**
+                 * Supprimer la donnée stockée localement
+                 *
+                 * @param {String} name  Nom de la donnée à supprimée.
+                 */
+                del: function(name) {
+                    self.localStorage.removeItem(prefix + name);
+                }
+            }
+        };
+
+        /**
+         * Refraichis automatiquement la page à l'interval donné en ms.
+         * @param interval
+         */
+        function autorefresh(interval) {
+            ls().set('interval', interval);
+
+            if (interval) {
+                setInterval(() => (document.location.reload()), interval);
+            }
+        }
+
+        let interval = parseInt(ls().get('interval'));
+        autorefresh(interval);
+    </script>
+    <style>
+/*
+
+Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-license.org/
+
+*/
+body pre {
+
+}
+body code[class^='language'] {
+  color: #f8f8f2;
+}
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #23241f;
+}
+
+.hljs,
+.hljs-tag,
+.hljs-subst {
+  color: #f8f8f2;
+}
+
+.hljs-strong,
+.hljs-emphasis {
+  color: #a8a8a2;
+}
+
+.hljs-bullet,
+.hljs-quote,
+.hljs-number,
+.hljs-regexp,
+.hljs-literal,
+.hljs-link {
+  color: #ae81ff;
+}
+
+.hljs-code,
+.hljs-title,
+.hljs-section,
+.hljs-selector-class {
+  color: #a6e22e;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-name,
+.hljs-attr {
+  color: #f92672;
+}
+
+.hljs-symbol,
+.hljs-attribute {
+  color: #66d9ef;
+}
+
+.hljs-params,
+.hljs-class .hljs-title {
+  color: #f8f8f2;
+}
+
+.hljs-string,
+.hljs-type,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-selector-id,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-variable {
+  color: #e6db74;
+}
+
+.hljs-comment,
+.hljs-deletion,
+.hljs-meta {
+  color: #75715e;
+  /*color: #26D651;*/
+}/**
+ * @Author:  NDU90045
+ * @Release: 09.01.2019
+ * @Version: v1.0.0
+ *
+ * @Desc:    Feuille de style LESS pour la conversion Markdown vers PDF ou HTML
+ *
+ */
+/**
+ * Configuration Par défaut, applicable à PDF
+ */
+@font-face {
+  font-family: 'BentonSans';
+  src: url('.fonts/benton-sans-regular.eot');
+  src: url('.fonts/benton-sans-regular.eot#iefix') format('eot'), url('.fonts/benton-sans-regular.ttf') format('truetype'), url('.fonts/benton-sans-regular.woff') format('woff'), url('.fonts/benton-sans-regular.svg#BentonSansRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'BentonSans';
+  src: url('.fonts/benton-sans-bold.eot');
+  src: url('.fonts/benton-sans-bold.eot#iefix') format('embedded-opentype'), url('.fonts/benton-sans-bold.ttf') format('truetype'), url('.fonts/benton-sans-bold.woff') format('woff'), url('.fonts/benton-sans-bold.svg#BentonSansRegular') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'BentonSansMedium';
+  src: url('.fonts/benton-sans-medium.eot');
+  src: url('.fonts/benton-sans-medium.eot#iefix') format('embedded-opentype'), url('.fonts/benton-sans-medium.ttf') format('truetype'), url('.fonts/benton-sans-medium.woff') format('woff'), url('.fonts/benton-sans-medium.svg#BentonSansMedium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SAPBold';
+  src: url('.fonts/BentonSansBold.woff2') format('woff2'), url('.fonts/BentonSansBold.woff') format('woff'), url('.fonts/BentonSansBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SAPBook';
+  src: url('.fonts/BentonSansBook.eot');
+  src: url('.fonts/BentonSansBook.eot?#iefix') format('embedded-opentype'), url('.fonts/BentonSansBook.woff2') format('woff2'), url('.fonts/BentonSansBook.woff') format('woff'), url('.fonts/BentonSansBook.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SAPMedium';
+  src: url('.fonts/BentonSansMedium.eot');
+  src: url('.fonts/BentonSansMedium.eot?#iefix') format('embedded-opentype'), url('.fonts/BentonSansMedium.woff2') format('woff2'), url('.fonts/BentonSansMedium.woff') format('woff'), url('.fonts/BentonSansMedium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SAPRegular';
+  src: url('.fonts/BentonSansRegular.eot');
+  src: url('.fonts/BentonSansRegular.eot?#iefix') format('embedded-opentype'), url('.fonts/BentonSansRegular.woff2') format('woff2'), url('.fonts/BentonSansRegular.woff') format('woff'), url('.fonts/BentonSansRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SAPLight';
+  src: url('.fonts/BentonSansLight.eot');
+  src: url('.fonts/BentonSansLight.eot?#iefix') format('embedded-opentype'), url('.fonts/BentonSansLight.woff2') format('woff2'), url('.fonts/BentonSansLight.woff') format('woff'), url('.fonts/BentonSansLight.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'sap-icofonts';
+  src: url('.fonts/sap-icofonts.eot');
+  src: url('.fonts/sap-icofonts.eot#iefix') format('embedded-opentype'), url('.fonts/sap-icofonts.ttf') format('truetype'), url('.fonts/sap-icofonts.woff') format('woff'), url('.fonts/sap-icofonts.svg#sap-icofonts') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SAPcom icons';
+  src: url('.fonts/sapcom-icons.eot');
+  src: url('.fonts/sapcom-icons.eot?#iefix') format('embedded-opentype'), url('.fonts/sapcom-icons.woff') format('woff'), url('.fonts/sapcom-icons.ttf') format('truetype'), url('.fonts/sapcom-icons.svg#sapcom-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'louis_vuittondemi';
+  src: url('.fonts/louisvuitton-demi-webfont-webfont.eot');
+  src: url('.fonts/louisvuitton-demi-webfont-webfont.eot?#iefix') format('embedded-opentype'), url('.fonts/louisvuitton-demi-webfont-webfont.woff2') format('woff2'), url('.fonts/louisvuitton-demi-webfont-webfont.woff') format('woff'), url('.fonts/louisvuitton-demi-webfont-webfont.ttf') format('truetype'), url('.fonts/louisvuitton-demi-webfont-webfont.svg#louis_vuittondemi') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'louis_vuittonmedium';
+  src: url('.fonts/louisvuitton-medium-webfont-webfont.eot');
+  src: url('.fonts/louisvuitton-medium-webfont-webfont.eot?#iefix') format('embedded-opentype'), url('.fonts/louisvuitton-medium-webfont-webfont.woff2') format('woff2'), url('.fonts/louisvuitton-medium-webfont-webfont.woff') format('woff'), url('.fonts/louisvuitton-medium-webfont-webfont.ttf') format('truetype'), url('.fonts/louisvuitton-medium-webfont-webfont.svg#louis_vuittonmedium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'louis_vuittonregular';
+  src: url('.fonts/louisvuitton-regular-webfont-webfont.eot');
+  src: url('.fonts/louisvuitton-regular-webfont-webfont.eot?#iefix') format('embedded-opentype'), url('.fonts/louisvuitton-regular-webfont-webfont.woff2') format('woff2'), url('.fonts/louisvuitton-regular-webfont-webfont.woff') format('woff'), url('.fonts/louisvuitton-regular-webfont-webfont.ttf') format('truetype'), url('.fonts/louisvuitton-regular-webfont-webfont.svg#louis_vuittonregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: "BentonSans", Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  padding: 0 5rem;
+  /** Code Simple **/
+  /** Code Block **/
+  /**
+     * Configuration Custom pour HTML
+     */
+}
+body h1 {
+  font-size: 2.03616rem;
+  text-transform: uppercase;
+  color: #1e5fbb;
+  text-align: center;
+  border: 1px solid #043261;
+  background-color: #f5f9fc;
+  border-radius: 3px;
+  font-family: "SAPBold";
+}
+body h2 {
+  padding: 0.1rem 0 0.3rem;
+  color: #1e5fbb;
+  font-weight: normal;
+  font-size: 1.16352;
+  position: relative;
+}
+body h2:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  border-bottom: 2px solid #f92672;
+  bottom: -2px;
+  left: -4px;
+}
+body h2:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  border-bottom: 2px solid black;
+  bottom: -4px;
+  left: 4px;
+}
+body h3 {
+  color: #1e5fbb;
+  font-size: 1.008rem;
+  font-weight: normal;
+  border-bottom: 1px solid #f92672;
+  padding: 0.1rem 0 0.25rem;
+}
+body h4 {
+  font-size: 0.9rem;
+  color: #1e5fbb;
+  font-weight: 100;
+  border-bottom: 1px solid #ffffff;
+}
+body h5 {
+  font-size: 0.8rem;
+  color: #1e5fbb;
+  font-weight: normal;
+  font-style: italic;
+}
+body h6 {
+  font-size: 0.7rem;
+  /** 0.95 **/
+  color: #1e5fbb;
+  font-weight: normal;
+  padding: 0.1rem 0 0.25rem 1rem;
+  font-style: italic;
+}
+body hr {
+  border-color: #eaeaea;
+}
+body pre {
+  font-size: 0.65em;
+  background: #272822;
+  /*background: #fafafa;*/
+  /*border: .1rem solid #4d4e4a; !* #272822*!*/
+  border: 1px solid #a8194e;
+  border-radius: 3px;
+  padding: 0.6rem;
+}
+body p {
+  text-align: justify;
+}
+body img {
+  display: block;
+  margin: auto;
+}
+body strong {
+  font-family: "SAPBold";
+}
+body sup[index] {
+  color: red;
+}
+body abbr[title]:after,
+body a[href]:after {
+  content: "";
+}
+body code:not([class^='language']):not(.hljs) {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  padding: 0.125rem 0.25rem;
+  font-size: 90%;
+  border-radius: 3px;
+  /** Gitlab Readme theme **/
+  /*color: #c0341d;
+        background-color: #fcefed;*/
+  /** Gitlab Doc Theme**/
+  /*color: #5f8341;
+        background-color: rgba(95,131,65,0.1);*/
+  /** GitLab Mention Theme **/
+  /*color: #1b69b6;
+        background-color: #e4f0fb;*/
+  /** GitLab Mention Theme (Customized : Darker/Lighter) **/
+  color: #a8194e;
+  background-color: #f5f9fc;
+  /** GitHub Theme **/
+  /*background-color: rgba(27,31,35,0.05);*/
+}
+body code[class^='language'] {
+  /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
+  /** Default color : **/
+  /*color: #3f3f3f;*/
+  font-size: 1.15em;
+  color: #f8f8f2;
+}
+body blockquote {
+  border: 1px solid #115090;
+  border-radius: 3px;
+  font-style: italic;
+  background: #f5f9fc;
+  padding: 0 1rem;
+}
+body blockquote p img {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+body blockquote[yellow] {
+  padding: 0.6rem 1rem;
+  border: none;
+  color: white;
+  background: -webkit-linear-gradient(left, #f8a200, #e26d27);
+}
+body blockquote[ryellow] {
+  padding: 0.6rem 1rem;
+  border: none;
+  color: white;
+  background: -webkit-linear-gradient(right, #f8a200, #e26d27);
+}
+body blockquote[blue] {
+  padding: 0.6rem 1rem;
+  border: none;
+  color: white;
+  background: -webkit-linear-gradient(left, #00b5ef, #1e5fbb);
+}
+body blockquote[rblue] {
+  padding: 0.6rem 1rem;
+  border: none;
+  color: white;
+  background: -webkit-linear-gradient(right, #00b5ef, #1e5fbb);
+}
+body blockquote[purple] {
+  padding: 0.6rem 1rem;
+  border: none;
+  color: white;
+  background: -webkit-linear-gradient(left, #f000b8, #a21f83);
+}
+body blockquote[rpurple] {
+  padding: 0.6rem 1rem;
+  border: none;
+  color: white;
+  background: -webkit-linear-gradient(right, #f000b8, #a21f83);
+}
+body blockquote[green] {
+  padding: 0.6rem 1rem;
+  border: none;
+  color: white;
+  background: -webkit-linear-gradient(left, #54f000, #49a518);
+}
+body blockquote[rgreen] {
+  padding: 0.6rem 1rem;
+  border: none;
+  color: white;
+  background: -webkit-linear-gradient(right, #54f000, #49a518);
+}
+body table {
+  margin: auto;
+  border: 1px solid #3f3f3f;
+}
+body table th,
+body table td {
+  /*border: 1px solid #3f3f3f;*/
+  border: 1px solid white;
+  padding: 0.2rem 0.4rem;
+}
+body table tr:first-child th {
+  background: #1e5fbb;
+  color: white;
+}
+body table tr:nth-child(odd) td {
+  background: #f5f9fc;
+}
+body.HTMLRender {
+  padding: 0;
+  /**
+         * DFTS: Classe pour les documents Word de type DFTS
+         */
+}
+body.HTMLRender.DFTS {
+  font-family: 'Calibri', sans-serif;
+  font-size: 11pt;
+}
+body.HTMLRender.DFTS h1 {
+  font-size: 16pt;
+}
+body.HTMLRender.DFTS h2 {
+  font-size: 14pt;
+}
+body.HTMLRender.DFTS h3 {
+  font-size: 13pt;
+}
+body.HTMLRender.DFTS h4 {
+  font-size: 10pt;
+}
+body.HTMLRender.DFTS h5 {
+  font-size: 10pt;
+  font-weight: normal;
+}
+body.HTMLRender.DFTS h6 {
+  font-size: 10pt;
+  font-weight: normal;
+  font-style: italic;
+}
+body.HTMLRender.DFTS pre {
+  font-size: 0.8rem;
+}
+body.HTMLRender.DFTS strong {
+  font-family: 'Calibri', sans-serif;
+}
+    </style>
+</head>
+<body class="HTMLRender DFTS">
+<h1 id="ifoptreadme">ifopt ReadMe</h1>
+<p><code>ifopt</code> is my own <strong>Command Line Interface</strong> options parser with some
+other feature.
+During a project where I developed a simple script, I need to add some
+option to change the behavior. I use <strong>NodeJS</strong> options and parse them
+as like <strong>PHP</strong> perform. </p>
+<p>So, finaly I created <code>ifopt</code> to reuse it event if <strong>cli</strong> lib already
+exist.</p>
+<h2 id="summary">Summary</h2>
+<p><a href="BeginSummary"></a></p>
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#how%20to%20use%20it">How to use it</a><ul>
+<li><a href="#installation%20of%20%20%60%60ifopt%60%60">Installation of  <code>ifopt</code></a></li>
+<li><a href="#load%20%60ifopt%60%20object">Load <code>ifopt</code> object</a></li>
+<li><a href="#%60%60ifopt%60%60%20mains%20functionnalities"><code>ifopt</code> mains functionnalities</a></li>
+<li><a href="#parse%20nodejs%20options">Parse NodeJS options</a></li>
+<li><a href="#focus%20on%20implicits">Focus on implicits</a></li>
+<li><a href="#check%20option%20(%60isoption()%60">Check Option (<code>isOption()</code>)</a>)</li>
+<li><a href="#get%20option%20value%20(%60getoptvalue()%60">Get Option Value (<code>getOptValue()</code>)</a>)</li>
+<li><a href="#get%20option%20values%20(%60getoptsvalues()%60">Get Option ValueS (<code>getOptsValues()</code>)</a>)</li>
+<li><a href="#log%20in%20stdout%20(%60log()%60">Log in STDOUT (<code>log()</code>)</a>)</li>
+<li><a href="#enabling%20/%20disabling%20colors">Enabling / Disabling Colors</a></li>
+<li><a href="#managing%20colors">Managing colors</a><ul>
+<li><a href="#get%20default%20colors%20(%60getcolors()%60">Get default colors (<code>getColors()</code>)</a>)</li>
+<li><a href="#get%20one%20color%20(%60getcolor()%60">Get one color (<code>getColor()</code>)</a>)</li>
+<li><a href="#update%20colors%20(%60setcolors()%60">Update colors (<code>setColors()</code>)</a>)</li>
+<li><a href="#update%20one%20color%20(%60setcolor()%60">Update one color (<code>setColor()</code>)</a>)
+<a href="EndSummary"></a></li></ul></li></ul></li>
+</ul>
+<h2 id="howtouseit">How to use it</h2>
+<h3 id="installationofifopt">Installation of  <code>ifopt</code></h3>
+<ul>
+<li>Go into the root of your project</li>
+<li>Type the following command : <code>npm install ifopt</code> :<ul>
+<li>That will creates a <code>package.json</code> file, or add it as dependency.</li></ul></li>
+</ul>
+<h3 id="loadifoptobject">Load <code>ifopt</code> object</h3>
+<ul>
+<li>Once <code>ifopt</code> installed, load it as following :</li>
+</ul>
+<pre><code class="js language-js">const opt = require('ifopt');
+</code></pre>
+<h3 id="ifoptmainsfunctionnalities"><code>ifopt</code> mains functionnalities</h3>
+<p>In the world of <strong>Command Line Interface options</strong>,
+there is two kind of options :</p>
+<ul>
+<li>The short options which begins with one dash (<code>-</code>).</li>
+<li>The long options which begins with two dashes (<code>--</code>).</li>
+</ul>
+<p>I created a third kind of option : <strong>the implicits</strong> ones.
+All elements put behind the command are an option.</p>
+<p>For instance, in this command <code>find text -v --output=file.txt</code>,
+<code>text</code> is also an option as <code>-v</code> and <code>--output</code> are.
+<strong>implicits</strong> option are identified with their position, without
+taking account of short &amp; long option :</p>
+<ul>
+<li><code>find text -v --output=file.txt</code></li>
+<li><code>find -v text --output=file.txt</code></li>
+<li><code>find -v --output=file.txt text</code></li>
+</ul>
+<p>Herebefore, <code>text</code> is always the <strong>first</strong> implicit option.</p>
+<p><code>ifopt</code> only parse options.
+Using returned option is in your hand.
+You can decide to use implicit, sort and long option for
+the same information (Eg: <strong>input file</strong>)
+.</p>
+<p>An option <strong>CAN HAVE</strong> (<code>::</code>), <strong>MUST HAVE</strong> (<code>:</code>) or <strong>NOT</strong> (<code></code>)
+a value.
+It's possible to set the expected behavior regarding the option.
+<code>ifopt</code> will warn the user when the option not fullfill the requirement.</p>
+<h3 id="parsenodejsoptions">Parse NodeJS options</h3>
+<p><code>ifopt</code> offers differents ways to set and get <strong>NodeJS</strong> options.
+The simpliest way is to get options is parse them directly
+using your options configuration :</p>
+<pre><code class="js language-js">const opt = require('ifopt');
+
+// Declaration of option which will be manage by ifopt :
+const myOptions = {
+    shortopt: "hd:o::",
+    longopt: [
+        "help",     // short is h (NOT  HAVE a value)
+        "dir:" ,    // short is d (MUST HAVE a value) 
+        "output::"  // short is o (CAN  HAVE a value)
+    ]
+}
+
+let parsedOption = opt.getopt(
+    myOptions.shortopt,
+    myOptions.longopt
+);
+</code></pre>
+<p>The following execution with this command
+will return for <code>parsedOption</code> :</p>
+<pre><code class="bash language-bash">myCommand -d=test -o --unwantedoption
+</code></pre>
+<pre><code class="json language-json">{
+  d: { arg: '-d=test', opt: 'd', val: 'test' },
+  o: { arg: '-o', opt: 'o', val: null }
+}
+</code></pre>
+<p>You can separately configure <code>ifopt</code> :</p>
+<pre><code class="js language-js">const opt = require('ifopt');
+
+// Set Short Options
+opt.setShortOpt("hd:o::");
+// Set Long Options
+opt.setLongOpt([
+    "help",     // short is h (NOT  HAVE a value)
+    "dir:" ,    // short is d (MUST HAVE a value) 
+    "output::"  // short is o (CAN  HAVE a value)
+]);
+
+let parsedOption = opt.getopt();
+</code></pre>
+<p>Which will produce the same result :</p>
+<pre><code class="json language-json">{
+  d: { arg: '-d=test', opt: 'd', val: 'test' },
+  o: { arg: '-o', opt: 'o', val: null }
+}
+</code></pre>
+<p>Another way is to use <code>setOpts</code> :</p>
+<pre><code class="js language-js">const opt = require('ifopt');
+
+// Set Short Options
+opt.setOpts(
+    // Short Ones
+    "hd:o::", 
+    // Long Ones
+    [
+        "help",     // short is h (NOT  HAVE a value)
+        "dir:" ,    // short is d (MUST HAVE a value) 
+        "output::"  // short is o (CAN  HAVE a value)
+    ]
+);
+
+let parsedOption = opt.getopt();
+</code></pre>
+<h3 id="focusonimplicits">Focus on implicits</h3>
+<p>Please find below how to handle implicits options for the
+following command :</p>
+<pre><code class="bash language-bash">myCommand myInputFile --dir=test myOutputFile 
+</code></pre>
+<pre><code class="js language-js">const opt = require('ifopt');
+
+// Declaration of option which will be manage by ifopt :
+const myOptions = {
+    shortopt: "hd:o::i:",
+    longopt: [
+        "help",     // short is h (NOT  HAVE a value)
+        "dir:" ,    // short is d (MUST HAVE a value)
+        "input:" ,  // short is d (MUST HAVE a value)
+        "output::"  // short is o (CAN  HAVE a value)
+    ]
+}
+
+let implicitsHandler = {
+    implicitOneForInput : null,
+    implicitTwoForOutput: null
+}
+
+// Parse command line arguments
+let parsedOption = opt.getopt(
+    myOptions.shortopt,                                         // Short Options
+    myOptions.longopt,                                             // Long  Options
+    ['implicitOneForInput', 'implicitTwoForOutput'],    // Implicits Order for Handler
+    implicitsHandler                                            // Implicits Handler to get Data by Ref
+);
+
+// Result of command : myCommand myInputFile --dir=test myOutputFile
+console.log(parsedOption);
+console.log(implicitsHandler);
+</code></pre>
+<p>will return : </p>
+<pre><code class="plaintext language-plaintext">{ dir: { arg: '--dir=test', opt: 'dir', val: 'test' } }
+{
+  implicitOneForInput: 'myInputFile',
+  implicitTwoForOutput: 'myOutputFile'
+}
+</code></pre>
+<p>So you can also pass implicit order and handler 
+for method <code>setOpts</code> : </p>
+<pre><code class="js language-js">let implicitsHandler = {
+    implicitOneForInput : null,
+    implicitTwoForOutput: null
+}
+
+opt.setOpts(
+    // Short Ones
+    "hd:o::",
+    // Long Ones
+    [
+        "help",     // short is h (NOT  HAVE a value)
+        "dir:" ,    // short is d (MUST HAVE a value)
+        "output::"  // short is o (CAN  HAVE a value)
+    ],
+    // Implicits Orders
+    ['implicitOneForInput', 'implicitTwoForOutput'],
+    // Implicits Handler
+    implicitsHandler
+);
+</code></pre>
+<p>You can also set implicits separately :</p>
+<pre><code class="js language-js">let implicitsHandler = {
+    implicitOneForInput : null,
+    implicitTwoForOutput: null
+}
+
+// Set Implicits
+opt.setImplicitOpt(
+    ['implicitOneForInput', 'implicitTwoForOutput'],
+    implicitsHandler
+)
+</code></pre>
+<h3 id="checkoptionisoption">Check Option (<code>isOption()</code>)</h3>
+<p>Once you have parsed arguments from your command line,
+you have to developped your logique and your function 
+to perform processing.</p>
+<p>Sometime, you want to check if an option
+have been correctly passed.</p>
+<p>Instead of checking in <code>parsedOptions</code> get
+from <code>getopt</code>, you can directly use
+method <code>isOption()</code> which can check one
+or more options at once.
+Done like this, you are checking for
+one option which can be provided
+in long or short version :</p>
+<pre><code class="js language-js">if (opt.isOption(['dir','d'])) {
+    console.log("Directory is provided")
+} else {
+    console.log("Directory is NOT provided")
+}
+</code></pre>
+<p>If you want to combine availability of two or more
+options you can change the operator :</p>
+<pre><code class="js language-js">if (opt.isOption(['d','i'], 'and')
+) {
+    console.log("Directory AND input are provided")
+} else {
+    console.log("Directory OR input NOT provided")
+}
+</code></pre>
+<h3 id="getoptionvaluegetoptvalue">Get Option Value (<code>getOptValue()</code>)</h3>
+<p>Once again, to prevent you to get value
+in <code>parsedOptions</code>, you can
+use method <code>getOptValue</code> :</p>
+<pre><code class="js language-js">let directory = opt.getOptValue(['dir', 'd']);
+</code></pre>
+<p>The herebefore statement will return the value
+of the first option found.
+It's very usefull to get value independantly of
+the short and long option.
+Done like this, longs options have the priority
+over shorts ones.</p>
+<p>For command :</p>
+<pre><code class="bash language-bash">myCommand -d=test --dir=test2
+</code></pre>
+<p><code>directory</code> will be equal to <code>test2</code> (<code>--dir=test2</code>)</p>
+<h3 id="getoptionvaluesgetoptsvalues">Get Option ValueS (<code>getOptsValues()</code>)</h3>
+<p>This version will return an array of values
+for provided options :</p>
+<pre><code class="js language-js">let files = opt.getOptsValues(['input', 'i']);
+</code></pre>
+<p>For command :</p>
+<pre><code class="bash language-bash">myCommand -i=file_1 --input=file_2 -i=file_3
+</code></pre>
+<p><code>files</code> is equal to <code>[ 'file_2', 'file_1', 'file_3' ]</code></p>
+<h3 id="loginstdoutlog">Log in STDOUT (<code>log()</code>)</h3>
+<p><code>ifopt</code> provides a method to send message in
+<code>STDOUT</code> nammed <code>log()</code>.</p>
+<p>By default, this command will generate a message
+like this in the console using colors :</p>
+<pre><code>[ &lt;level&gt; ] : &lt;message&gt;
+</code></pre>
+<p>Below, the argument of method <code>log</code> :</p>
+<ul>
+<li>String, message, Message to display.</li>
+<li>Number, level,   Level of the message. 0=OK,1=KO,2=WARN.</li>
+<li>Array,  args    Arguments which will replace placeholder (%s) in message.</li>
+</ul>
+<pre><code class="js language-js">const log = opt.log;
+// Considering provided option "i" was equal to "&lt;yourFile&gt;"
+log("File %s not found", 1, [opt.getOptValue("i")]);
+</code></pre>
+<p>The herebefore statement will log the message :</p>
+<pre><code>[ ERROR ] : File &lt;yourFile&gt; not found
+</code></pre>
+<h3 id="enablingdisablingcolors">Enabling / Disabling Colors</h3>
+<p>When you redirect you output to file,
+you do not want control char in your log file.</p>
+<p>So, to prevent specials char, you can easily 
+disable colors.</p>
+<p>Simply call method <code>noColor()</code> to turn
+off color in method <code>log()</code>.</p>
+<pre><code class="js language-js">opt.noColor();
+// Or like this
+opt.useColor(false);
+</code></pre>
+<p>To turn on the color :</p>
+<pre><code class="js language-js">opt.useColor();
+// Or
+opt.useColor(true);
+</code></pre>
+<h3 id="managingcolors">Managing colors</h3>
+<h4 id="getdefaultcolorsgetcolors">Get default colors (<code>getColors()</code>)</h4>
+<h4 id="getonecolorgetcolor">Get one color (<code>getColor()</code>)</h4>
+<h4 id="updatecolorssetcolors">Update colors (<code>setColors()</code>)</h4>
+<h4 id="updateonecolorsetcolor">Update one color (<code>setColor()</code>)</h4></body>
+</html>
