@@ -1,0 +1,66 @@
+/* ClassForm.css */
+
+.class-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .class-form-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .class-form-group {
+    margin-bottom: 15px;
+  }
+  
+  .class-form-group label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .class-form-group input,
+  .class-form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .class-form-group input:focus,
+  .class-form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .class-form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+  
+  .class-form-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .class-form-button:hover {
+    background-color: #0056b3;
+  }
+  

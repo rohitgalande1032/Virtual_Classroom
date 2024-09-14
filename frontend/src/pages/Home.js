@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { getAllClasses } from '../services/api';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import ClassCard from '../components/ClassCard';
+import './Home.css';
 
 const Home = () => {
   const [classes, setClasses] = useState([]);
@@ -9,24 +9,33 @@ const Home = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await getAllClasses();
+        const response = await axios.get('/api/classes');
+        console.log('Fetched classes:', response.data); // Ensure data is correct
         setClasses(response.data);
       } catch (error) {
         console.error('Error fetching classes:', error);
       }
     };
+  
     fetchClasses();
   }, []);
+  
 
   return (
-    <div>
-      <h1>Available Classes</h1>
-      <div>
-        {classes.map((classItem) => (
-          <Link to={`/class/${classItem._id}`} key={classItem._id}>
-            <ClassCard title={classItem.title} />
-          </Link>
-        ))}
+    <div className="home">
+      <h1 className="home-title">Available Classes</h1>
+      <div className="class-card-container">
+        {classes.length > 0 ? (
+          classes.map((classData) => (
+            <ClassCard
+              key={classData._id}
+              title={classData.title}
+              description={classData.description}
+            />
+          ))
+        ) : (
+          <p>No classes available</p>
+        )}
       </div>
     </div>
   );

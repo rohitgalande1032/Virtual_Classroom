@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ClassForm from '../components/ClassForm';
+import ClassForm from './ClassForm';
 import ClassList from '../components/ClassList';
 
 const ManageClasses = () => {

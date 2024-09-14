@@ -1,0 +1,44 @@
+/* ClassCard.css */
+
+.class-card {
+    background-color: #fff; /* White background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .class-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More prominent shadow on hover */
+  }
+  
+  .class-title {
+    font-size: 24px;
+    color: #333; /* Dark text */
+    margin: 0 0 10px;
+  }
+  
+  .class-description {
+    font-size: 16px;
+    color: #666; /* Gray text */
+    margin: 0 0 20px;
+  }
+  
+  .view-details-button {
+    background-color: #f39c12; /* Yellow background */
+    color: #fff; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .view-details-button:hover {
+    background-color: #e67e22; /* Darker orange on hover */
+  }
+  
