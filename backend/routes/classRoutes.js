@@ -1,26 +1,18 @@
+// backend/routes/classRoutes.js
 const express = require('express');
 const router = express.Router();
-const {
-  createClass,
-  getClasses,
-  getClassById,
-  updateClass,
-  deleteClass
-} = require('../controllers/classController');
+const ClassController = require('../controllers/classController');
 
-// Create a new class
-router.post('/', createClass);
+// Route to create a class
+router.post('/', ClassController.createClass);
 
-// Get all classes
-router.get('/', getClasses);
+// Route to get all classes
+router.get('/', ClassController.getAllClasses);
 
-// Get a class by ID
-//router.get('/:id', getClassById);
+// Route to update a class
+router.put('/:id', ClassController.updateClass);
 
-// Update a class
-router.put('/:id', updateClass);
-
-// Delete a class
-router.delete('/:id', deleteClass);
+// Route to delete a class
+router.delete('/:id', ClassController.deleteClass);
 
 module.exports = router;

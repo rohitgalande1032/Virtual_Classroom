@@ -1,53 +1,39 @@
+// backend/controllers/classController.js
 const Class = require('../models/classModel');
 
-// Get all classes
-const getClasses = async (req, res) => {
+exports.createClass = async (req, res) => {
   try {
-    const classes = await Class.find().populate('units').populate('students');
-    res.json(classes);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' });
-  }
-};
-
-// Create a new class
-const createClass = async (req, res) => {
-  const { title, units, students } = req.body;
-  try {
-    const newClass = new Class({ title, units, students });
+    const newClass = new Class(req.body);
     await newClass.save();
     res.status(201).json(newClass);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to create class' });
+    res.status(400).json({ message: error.message });
   }
 };
 
-// Update class by ID
-const updateClass = async (req, res) => {
-  const { id } = req.params;
+exports.getAllClasses = async (req, res) => {
   try {
-    const updatedClass = await Class.findByIdAndUpdate(id, req.body, { new: true });
-    if (!updatedClass) return res.status(404).json({ message: 'Class not found' });
-    res.json(updatedClass);
+    const classes = await Class.find();
+    res.status(200).json(classes);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to update class' });
+    res.status(400).json({ message: error.message });
   }
 };
 
-// Delete class by ID
-const deleteClass = async (req, res) => {
-  const { id } = req.params;
+exports.updateClass = async (req, res) => {
   try {
-    await Class.findByIdAndDelete(id);
-    res.json({ message: 'Class deleted successfully' });
+    const updatedClass = await Class.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.status(200).json(updatedClass);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to delete class' });
+    res.status(400).json({ message: error.message });
   }
 };
 
-module.exports = {
-  getClasses,
-  createClass,
-  updateClass,
-  deleteClass,
+exports.deleteClass = async (req, res) => {
+  try {
+    await Class.findByIdAndDelete(req.params.id);
+    res.status(204).end();
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
